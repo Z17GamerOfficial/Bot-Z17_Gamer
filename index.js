@@ -167,3 +167,27 @@ client.on("messageCreate", message => {
         message.channel.send({ embeds: [embed] })
     }
 })
+//AVATAR
+client.on("messageCreate", message => {
+    if (message.content.startsWith("z!avatar")) {
+        if (message.content.trim() == "!avatar") {
+            var utente = message.member;
+        }
+        else {
+            var utente = message.mentions.members.first();
+        }
+        if (!utente) {
+            return message.channel.send("Utente non trovato")
+        }
+        var embed = new Discord.MessageEmbed()
+            .setTitle(utente.user.tag)
+            .setDescription("**Ecco l'avatar di questo utente!!**")
+            .setColor("#0cff00")
+            .setImage(utente.user.displayAvatarURL({
+                dynamic: true,
+                format: "png",
+                size: 512
+            }))
+        message.channel.send({ embeds: [embed] })
+    }
+})
